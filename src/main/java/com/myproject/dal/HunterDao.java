@@ -1,5 +1,7 @@
 package com.myproject.dal;
 
+import java.sql.SQLException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +19,7 @@ public class HunterDao implements DaoInterface<Hunter> {
     /*
     * returns result of a select all query on the Hunter table
     */
-    public ArrayList<Hunter> findAll() {
+    public ArrayList<Hunter> findAll() throws SQLException {
         ArrayList<Hunter> hunters = new ArrayList<Hunter>();
         
         Connection con = DBCon.getConnection();
@@ -52,7 +54,7 @@ public class HunterDao implements DaoInterface<Hunter> {
     * Specifically, it finds which Hunters are still
     * alive in the comic book continuity.
     */
-    public ArrayList<Hunter> findAllAlive() {
+    public ArrayList<Hunter> findAllAlive() throws SQLException {
         ArrayList<Hunter> hunters = new ArrayList<Hunter>();
         
         Connection con = DBCon.getConnection();
@@ -82,7 +84,7 @@ public class HunterDao implements DaoInterface<Hunter> {
         return hunters;
     }
     
-    public Hunter findByName(String firstName) {
+    public Hunter findByName(String firstName) throws SQLException {
         Connection con = DBCon.getConnection();
         Hunter hunter = new Hunter();
         
@@ -107,7 +109,7 @@ public class HunterDao implements DaoInterface<Hunter> {
         return hunter;
     }
     
-    public void update(Hunter hunter) {
+    public void update(Hunter hunter) throws SQLException {
         Connection con = DBCon.getConnection();
         
         try {
@@ -132,7 +134,7 @@ public class HunterDao implements DaoInterface<Hunter> {
         }
     }
     
-    public Hunter save(Hunter obj) {
+    public Hunter save(Hunter obj) throws SQLException {
         Connection con = DBCon.getConnection();
         
         try {
@@ -155,7 +157,7 @@ public class HunterDao implements DaoInterface<Hunter> {
         return obj;
     }
     
-    public void delete(String firstName) {
+    public void delete(String firstName) throws SQLException {
         Connection con = DBCon.getConnection();
         
         try {

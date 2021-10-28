@@ -7,7 +7,7 @@ package com.myproject.beans;
 public class Hunter {
    private int id;
    private String firstName;
-   private String lastName = "";
+   private String lastName;
    private String nenAffinity;
    private String occupation;
    private String status;

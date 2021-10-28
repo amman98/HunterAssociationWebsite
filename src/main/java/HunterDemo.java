@@ -11,8 +11,8 @@ public class HunterDemo {
     
     public static void main(String[] args) {
         System.out.println("Listing all Hunters:");
-        ArrayList<Hunter> hunters = dao.findAll();
-        displayAll(hunters);
+        //ArrayList<Hunter> hunters = dao.findAllAlive();
+        //displayAll(hunters);
     }
     
     private static void displayAll(ArrayList<Hunter> hunters) {

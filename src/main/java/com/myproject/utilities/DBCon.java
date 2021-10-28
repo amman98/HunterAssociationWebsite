@@ -18,7 +18,7 @@ public class DBCon {
     public static Connection getConnection() {
         if(con==null) {
             try {
-                //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             	con = DriverManager.getConnection(URL);
             }
             catch(Exception e) {

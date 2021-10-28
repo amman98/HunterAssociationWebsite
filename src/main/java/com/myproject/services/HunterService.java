@@ -1,4 +1,5 @@
 package com.myproject.services;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 
@@ -15,27 +16,27 @@ public class HunterService implements ServiceInterface<Hunter> {
         dao = new HunterDao();
     }
     
-    public Hunter save(Hunter hunter) {
+    public Hunter save(Hunter hunter) throws SQLException {
         return dao.save(hunter);
     }
     
-    public ArrayList<Hunter> findAll() {
+    public ArrayList<Hunter> findAll() throws SQLException {
         return dao.findAll();
     }
     
-    public ArrayList<Hunter> findAllAlive() {
+    public ArrayList<Hunter> findAllAlive() throws SQLException {
         return dao.findAllAlive();
     }
     
-    public Hunter findById(String firstName) {
+    public Hunter findById(String firstName) throws SQLException {
         return dao.findByName(firstName);
     }
     
-    public void update(Hunter obj) {
+    public void update(Hunter obj) throws SQLException {
         dao.update(obj);
     }
     
-    public void delete(String firstName) {
+    public void delete(String firstName) throws SQLException {
         dao.delete(firstName);
     }
 }
