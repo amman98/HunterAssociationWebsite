@@ -13,7 +13,6 @@ public class DBCon {
     
     // URL should work on any computer
     private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=HunterAssociation;integratedSecurity=true";
-    private static final String username = "LAPTOP-7UIV5OG9\\Amman Nega";
     
     public static Connection getConnection() {
         if(con==null) {

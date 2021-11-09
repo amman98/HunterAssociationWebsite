@@ -16,6 +16,8 @@
 			<th>Last Name</th>
 			<th>Nen Affinity</th>
 			<th>Occupation</th>
+			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 		<c:forEach items="${hunters}" var="hunter">
 			<tr>
@@ -23,6 +25,12 @@
 				<td>${hunter.lastName}</td>
 				<td>${hunter.nenAffinity}</td>
 				<td>${hunter.occupation}</td>
+				<td>
+					<a href="editHunter?id=${hunter.id}">Edit</a>
+				</td>
+				<td>
+					<a href="deleteHunter?id=${hunter.id}">Delete</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

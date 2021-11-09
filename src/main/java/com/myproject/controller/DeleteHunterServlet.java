@@ -1,6 +1,5 @@
 package com.myproject.controller;
 
-import java.util.ArrayList;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -14,28 +13,34 @@ import javax.servlet.http.HttpServletResponse;
 import com.myproject.beans.Hunter;
 import com.myproject.services.HunterService;
 
-@WebServlet("/currentHunters")
-public class CurrentHuntersListServlet extends HttpServlet {
+@WebServlet("/deleteHunter")
+public class DeleteHunterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public CurrentHuntersListServlet() {
+    private int parsedId;   
+	
+    public DeleteHunterServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = (String) request.getParameter("id");
+		
+		parsedId = Integer.parseInt(id);
+		
+		//Hunter hunter = null;
+		
 		HunterService dao = new HunterService();
 		
 		try {
-			ArrayList<Hunter> hunters = dao.findAllAlive();
-			request.setAttribute("hunters", hunters);
+			//hunter = dao.findById(parsedId);
+			dao.delete(parsedId);
 		}
 		catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getServletContext()
-				.getRequestDispatcher("/WEB-INF/hunterList.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/currentHunters");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

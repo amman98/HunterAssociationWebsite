@@ -28,15 +28,19 @@ public class HunterService implements ServiceInterface<Hunter> {
         return dao.findAllAlive();
     }
     
-    public Hunter findById(String firstName) throws SQLException {
-        return dao.findByName(firstName);
+    public Hunter findById(int id) throws SQLException {
+        return dao.findById(id);
+    }
+    
+    public Hunter findByName(String firstName) throws SQLException {
+    	return dao.findByName(firstName);
     }
     
     public void update(Hunter obj) throws SQLException {
         dao.update(obj);
     }
     
-    public void delete(String firstName) throws SQLException {
-        dao.delete(firstName);
+    public void delete(int id) throws SQLException {
+        dao.delete(id);
     }
 }

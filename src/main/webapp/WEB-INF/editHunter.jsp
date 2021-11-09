@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Hunter</title>
+<title>Edit Hunter</title>
 </head>
 <body>
-	<h3>Add Hunter</h3>
+	<h3>Edit Hunter</h3>
 	
-	<form method="POST" action="${pageContext.request.contextPath}/addHunter">
-         <table border="0">
+	<form method="POST" action="${pageContext.request.contextPath}/editHunter">
+		<table border="0">
             <tr>
                <td>First Name</td>
                <td><input type="text" name="firstName" value="${hunter.firstName}"/></td>
@@ -35,7 +34,7 @@
             </tr>
 			<tr>
                <td>Occupation</td>
-               <td><input type="text" name="occupation" value="Rookie Hunter" /></td>
+               <td><input type="text" name="occupation" value="${hunter.occupation}" /></td>
             </tr>
             
             <tr>
@@ -58,7 +57,6 @@
                </td>
             </tr>
          </table>
-      </form>
-	
+	</form>
 </body>
 </html>

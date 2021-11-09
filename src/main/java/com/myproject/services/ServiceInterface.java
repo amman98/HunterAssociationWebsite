@@ -16,11 +16,13 @@ public interface ServiceInterface<T> {
     
     ArrayList<T> findAllAlive() throws SQLException;
     
-    T findById(String firstName) throws SQLException;
+    T findById(int id) throws SQLException;
+    
+    T findByName(String firstName) throws SQLException;
     
     void update(T obj) throws SQLException;
     
     T save(T obj) throws SQLException;
     
-    void delete(String firstName) throws SQLException;
+    void delete(int id) throws SQLException;
 }

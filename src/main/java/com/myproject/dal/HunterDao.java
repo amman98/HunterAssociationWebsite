@@ -31,12 +31,13 @@ public class HunterDao implements DaoInterface<Hunter> {
             
             while(rs.next()) {
                 Hunter hunter = new Hunter();
-                hunter.setFirstName(rs.getString(1));
-                hunter.setLastName(rs.getString(2));
-                hunter.setNenAffinity(rs.getString(3));
-                hunter.setOccupation(rs.getString(4));
-                hunter.setStatus(rs.getString(5));
-                hunter.setDescription(rs.getString(6));
+                hunter.setId(rs.getInt(1));
+                hunter.setFirstName(rs.getString(2));
+                hunter.setLastName(rs.getString(3));
+                hunter.setNenAffinity(rs.getString(4));
+                hunter.setOccupation(rs.getString(5));
+                hunter.setStatus(rs.getString(6));
+                hunter.setDescription(rs.getString(7));
                 
                 hunters.add(hunter);
             }
@@ -66,12 +67,13 @@ public class HunterDao implements DaoInterface<Hunter> {
             
             while(rs.next()) {
                 Hunter hunter = new Hunter();
-                hunter.setFirstName(rs.getString(1));
-                hunter.setLastName(rs.getString(2));
-                hunter.setNenAffinity(rs.getString(3));
-                hunter.setOccupation(rs.getString(4));
-                hunter.setStatus(rs.getString(5));
-                hunter.setDescription(rs.getString(6));
+                hunter.setId(rs.getInt(1));
+                hunter.setFirstName(rs.getString(2));
+                hunter.setLastName(rs.getString(3));
+                hunter.setNenAffinity(rs.getString(4));
+                hunter.setOccupation(rs.getString(5));
+                hunter.setStatus(rs.getString(6));
+                hunter.setDescription(rs.getString(7));
                 
                 hunters.add(hunter);
             }
@@ -84,22 +86,52 @@ public class HunterDao implements DaoInterface<Hunter> {
         return hunters;
     }
     
+    /*
+     * for potential search bar I may incorporate to project
+     */
     public Hunter findByName(String firstName) throws SQLException {
         Connection con = DBCon.getConnection();
         Hunter hunter = new Hunter();
         
         try {
-            String qry = "select * from " + TABLE + "where First_name = ?";
+            String qry = "select * from " + TABLE + " WHERE First_name = ?";
             PreparedStatement st = con.prepareStatement(qry);
             st.setString(1, firstName);
             ResultSet rs = st.executeQuery();
             if(rs.next()) {
-                hunter.setFirstName(rs.getString(1));
-                hunter.setLastName(rs.getString(2));
-                hunter.setNenAffinity(rs.getString(3));
-                hunter.setOccupation(rs.getString(4));
-                hunter.setStatus(rs.getString(5));
-                hunter.setDescription(rs.getString(6));
+                hunter.setId(rs.getInt(1));
+                hunter.setFirstName(rs.getString(2));
+                hunter.setLastName(rs.getString(3));
+                hunter.setNenAffinity(rs.getString(4));
+                hunter.setOccupation(rs.getString(5));
+                hunter.setStatus(rs.getString(6));
+                hunter.setDescription(rs.getString(7));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBCon.closeConnection();
+        }
+        return hunter;
+    }
+    
+    public Hunter findById(int id) throws SQLException {
+    	Connection con = DBCon.getConnection();
+        Hunter hunter = new Hunter();
+        
+        try {
+            String qry = "select * from " + TABLE + " WHERE Id = ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()) {
+                hunter.setId(rs.getInt(1));
+                hunter.setFirstName(rs.getString(2));
+                hunter.setLastName(rs.getString(3));
+                hunter.setNenAffinity(rs.getString(4));
+                hunter.setOccupation(rs.getString(5));
+                hunter.setStatus(rs.getString(6));
+                hunter.setDescription(rs.getString(7));
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -113,9 +145,9 @@ public class HunterDao implements DaoInterface<Hunter> {
         Connection con = DBCon.getConnection();
         
         try {
-            String qry = "update " + TABLE + " "
-                    + "set First_name = ?, Last_name = ?, Nen_affinity = ?, Occupation = ?, Status = ?, Description = ? "
-                    + "where First_name = ?";
+            String qry = "update " + TABLE 
+                    + " set First_name = ?, Last_name = ?, Nen_affinity = ?, Occupation = ?, Status = ?, Description = ? "
+                    + "where Id = ?";
             PreparedStatement st = con.prepareStatement(qry);
             st.setString(1, hunter.getFirstName());
             st.setString(2, hunter.getLastName());
@@ -123,7 +155,7 @@ public class HunterDao implements DaoInterface<Hunter> {
             st.setString(4, hunter.getOccupation());
             st.setString(5, hunter.getStatus());
             st.setString(6, hunter.getDescription());
-            st.setString(7, hunter.getFirstName());
+            st.setInt(7, hunter.getId());
             
             st.executeUpdate();
             
@@ -157,15 +189,15 @@ public class HunterDao implements DaoInterface<Hunter> {
         return obj;
     }
     
-    public void delete(String firstName) throws SQLException {
+    public void delete(int id) throws SQLException {
         Connection con = DBCon.getConnection();
         
         try {
-            String qry = "delete from " + TABLE + " WHERE First_name = ?";
+            String qry = "delete from " + TABLE + " WHERE Id = ?";
             PreparedStatement st = con.prepareStatement(qry);
-            st.setString(1, firstName);
+            st.setInt(1, id);
             
-            st.executeQuery();
+            st.executeUpdate();
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
